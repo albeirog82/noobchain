@@ -1,7 +1,8 @@
 package noobchain.noobchain;
 
 import java.util.ArrayList;
-import java.util.Date; 
+import java.util.Date;
+import java.util.concurrent.TimeUnit; 
 
 public class Block {
 
@@ -30,13 +31,16 @@ public class Block {
 	}
 	
 	public void mineBlock(int difficulty) {
+		long startTime = System.nanoTime();
 		merkleRoot = StringUtil.getMerkleRoot(transactions);
 		String target = StringUtil.getDifficultyString(difficulty); 
 		while(!hash.substring(0, difficulty).equals(target)) {
 			nonce ++; 
 			hash = calculateHash();
 		}
-		System.out.println("Block Mined!!!: " + hash);
+		long endTime = System.nanoTime();
+		long time = TimeUnit.MILLISECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
+		System.out.println("Block Mined!!!: " + hash + " in " + time + " milliseconds");
 	}
 	
 	public boolean addTransaction(Transaction transaction) {
