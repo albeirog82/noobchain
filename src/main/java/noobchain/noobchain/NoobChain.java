@@ -14,7 +14,8 @@ public class NoobChain {
 	public static int difficulty = 3; 
 	public static float minimumTransaction = 0.1f;
 	public static Wallet walletA; 
-	public static Wallet walletB; 
+	public static Wallet walletB;
+	public static Wallet walletC;
 	public static Transaction genesisTransaction; 
 	
 	public static void main(String[] args) {
@@ -23,6 +24,7 @@ public class NoobChain {
 		
 		walletA = new Wallet();
 		walletB = new Wallet();
+		walletC = new Wallet();
 		Wallet coinbase = new Wallet();
 		
 		genesisTransaction = new Transaction(coinbase.publicKey, walletA.publicKey, 100f, null);
@@ -57,6 +59,13 @@ public class NoobChain {
 		block3.addTransaction(walletB.sendFunds(walletA.publicKey, 20));
 		System.out.println("\nWalletA's balance is: " + walletA.getBalance());
 		System.out.println("\nWalletB's balance is: " + walletB.getBalance());
+		
+		Block block4 = new Block(block3.hash);
+		System.out.println("\nWalletA is attempting to send funds (20) to Wallet C...");
+		block3.addTransaction(walletA.sendFunds(walletC.publicKey, 20));
+		System.out.println("\nWalletA's balance is: " + walletA.getBalance());
+		System.out.println("\nWalletC's balance is: " + walletC.getBalance());
+		
 		
 		isChainValid();
 	}
