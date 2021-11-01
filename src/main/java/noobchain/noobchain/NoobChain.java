@@ -126,8 +126,8 @@ public class NoobChain {
 					return false; 
 				}
 				
-				if(currentTransaction.outputs.get(0).recipient != currentTransaction.sender) {
-					System.out.println("#Transaction(" + t + " output 'change' is not sender.");
+				if(currentTransaction.outputs.get(1).recipient != currentTransaction.sender) {
+					System.out.println("#Transaction(" + t + ") output 'change' is not sender.");
 					return false; 
 				}
 				
